@@ -1,0 +1,30 @@
+[kafka]
+brokers = "localhost:9092"
+group_id = "my-consumer-group"
+topics = ["events", "orders"]
+auto_offset_reset = "earliest"
+session_timeout_ms = 30000
+max_poll_interval_ms = 300000
+statistics_interval_ms = 30000
+
+[consumer]
+concurrency = 4
+commit_strategy = "auto"
+auto_commit_interval_ms = 5000
+manual_commit_batch_size = 1
+max_retries = 3
+retry_backoff_ms = 1000
+shutdown_timeout_secs = 30
+infrastructure_retry_backoff_ms = 2000
+
+[dlq]
+enabled = true
+topic = "my-consumer-group.dlq"
+include_metadata = true
+flush_timeout_ms = 10000
+
+[health]
+enabled = true
+bind_address = "0.0.0.0:9090"
+max_poll_gap_secs = 60
+max_rebalance_secs = 120
